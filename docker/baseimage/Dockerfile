@@ -6,9 +6,7 @@ MAINTAINER anshul.verma86@gmail.com
 
 USER root
 
-ENV HOME /home/root
-
-RUN ["useradd", "-m", "anshul"]
+ENV HOME /root
 
 # Regenerate SSH keys
 RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
@@ -34,10 +32,3 @@ RUN cd emacs-source && \
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-USER anshul
-
-ENV HOME /home/anshul
-
-# Default command
-CMD ["bash"]
