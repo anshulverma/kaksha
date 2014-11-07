@@ -35,6 +35,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # set up bash config
 RUN curl -L https://github.com/anshulverma/bashrc/archive/v0.3.tar.gz | tar -xzm && \
-    cd bashrc-0.3g && \
+    cd bashrc-0.3 && \
     ./install.sh && \
     rm -rf ~/.profile
