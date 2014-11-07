@@ -1,23 +1,20 @@
-build = docker build -t anshulverma/$(1) ./docker/$(1)
+baseimage: IMAGE=baseimage
 
-push = docker push anshulverma/$(1)
+kaksha: IMAGE=kaksha
 
-baseimage: build.baseimage push.baseimage
+baseimage kaksha: build tag push
 
-kaksha: build.kaksha push.kaksha
+build:
+	docker build -t anshulverma/$(IMAGE) ./docker/$(IMAGE)
 
-build.baseimage:
-	$(call build,baseimage)
+push:
+	docker push anshulverma/$(IMAGE):$(TAG)
 
-push.baseimage:
-	$(call push,baseimage)
+TAG = $(shell git describe)
 
-build.kaksha:
-	$(call build,kaksha)
+tag:
+	docker tag anshulverma/baseimage:latest anshulverma/baseimage:$(TAG)
 
-push.kaksha:
-	$(call push,kaksha)
+all: baseimage kaksha
 
-build.all: baseimage kaksha
-
-.DEFAULT_GOAL := build.all
+.DEFAULT_GOAL := all
