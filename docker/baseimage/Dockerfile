@@ -21,12 +21,12 @@ RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup
 RUN echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache
 
 ### start APT package configuration ###
-RUN apt-get update && \
-    apt-get upgrade -y
+RUN apt-get update && apt-get upgrade -y
 
 # install all required packages in one line to limit layers
-RUN apt-get -y install git git-core \
-                       bash-completion
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install git git-core \
+                                                      bash-completion \
+                                                      lxde-core lxterminal tightvncserver
 
 # clean up APT when done
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
