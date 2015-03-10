@@ -9,7 +9,7 @@ TAG = $(shell git describe)
 baseimage kaksha apache2: build tag
 
 build: guard-IMAGE
-	docker build -t anshulverma/$(IMAGE) ./docker/$(IMAGE)
+	docker build -t anshulverma/$(IMAGE) ./$(IMAGE)
 
 tag: build guard-TAG
 	docker tag anshulverma/${IMAGE}:latest anshulverma/$(IMAGE):$(TAG)
