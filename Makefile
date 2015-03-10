@@ -2,19 +2,27 @@ baseimage: IMAGE=baseimage
 
 kaksha: IMAGE=kaksha
 
-baseimage kaksha: build tag push
-
-build:
-	docker build -t anshulverma/$(IMAGE) ./docker/$(IMAGE)
-
-push:
-	docker push anshulverma/$(IMAGE):$(TAG)
+apache2: IMAGE=apache2
 
 TAG = $(shell git describe)
 
-tag:
-	docker tag anshulverma/baseimage:latest anshulverma/baseimage:$(TAG)
+baseimage kaksha apache2: build tag
 
-all: baseimage kaksha
+build: guard-IMAGE
+	docker build -t anshulverma/$(IMAGE) ./docker/$(IMAGE)
+
+tag: build guard-TAG
+	docker tag anshulverma/${IMAGE}:latest anshulverma/$(IMAGE):$(TAG)
+
+push: tag
+	docker push anshulverma/$(IMAGE):$(TAG)
+
+guard-%:
+	@if test "${${*}}" = ""; then \
+		echo "Environment variable $* not set"; \
+		exit 1; \
+	fi
+
+all: baseimage kaksha apache2
 
 .DEFAULT_GOAL := all
