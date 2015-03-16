@@ -34,7 +34,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ### End APT package configuration ###
 
 # set up bash config
-RUN curl -L https://github.com/anshulverma/bashrc/archive/v0.3-12-g7745906.tar.gz | tar -xzm && \
-    cd bashrc-7745906a353ab3720f8e8e0b2b742d8c63477841 && \
+RUN curl -L https://github.com/anshulverma/bashrc/archive/v0.4.1.tar.gz | tar -xzm && \
+    cd bashrc-0.4.1 && \
     ./install.sh && \
     rm -rf ~/.profile
