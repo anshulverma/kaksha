@@ -28,6 +28,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install git git-core \
                                                       bash-completion \
                                                       lxde-core lxterminal tightvncserver
 
+EXPOSE 5901
+
 # clean up APT when done
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
