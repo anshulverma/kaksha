@@ -36,7 +36,9 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ### End APT package configuration ###
 
 # set up bash config
-RUN curl -L https://github.com/anshulverma/bashrc/archive/v0.4.1.tar.gz | tar -xzm && \
-    cd bashrc-0.4.1 && \
+RUN curl -L https://github.com/anshulverma/bashrc/archive/v0.5.tar.gz | tar -xzm && \
+    cd bashrc-0.5 && \
     ./install.sh && \
     rm -rf ~/.profile
+
+COPY scripts/.bashrc_init /root/.bashrc_init
